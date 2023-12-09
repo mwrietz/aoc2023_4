@@ -1,6 +1,7 @@
 // 2023 day 4
 
-#[derive(Debug)]
+//#[derive(Debug)]
+#[allow(dead_code)]
 struct Card {
     number: u32,
     winning_numbers: Vec<u32>,
@@ -29,8 +30,7 @@ fn score_card(card: &Card) -> u32 {
         if card.winning_numbers.contains(my_number) {
             if score == 0 {
                 score = 1;
-            }
-            else {
+            } else {
                 score *= 2;
             }
         }
@@ -40,9 +40,15 @@ fn score_card(card: &Card) -> u32 {
 }
 
 fn parse_card(line: &str) -> Card {
-
     let mut parts = line.split(':');
-    let number = parts.next().unwrap().trim().split_whitespace().last().unwrap().parse::<u32>().unwrap();
+    let number = parts
+        .next()
+        .unwrap()
+        .split_whitespace()
+        .last()
+        .unwrap()
+        .parse::<u32>()
+        .unwrap();
     let mut numbers_iter = parts.next().unwrap().split('|');
 
     let winning_numbers = parse_numbers(numbers_iter.next().unwrap());
